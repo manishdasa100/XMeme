@@ -1,6 +1,7 @@
 package com.xmeme.xmeme.services;
 
 import java.util.List;
+import java.util.Map;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -45,7 +46,6 @@ public class MemeServiceImpl implements MemeService{
 
     public PostDto getPost(long postId) throws PostNotFoundException{
         PostEntity postEntity = repositoryService.getPost(postId);
-        if (postEntity == null) throw new PostNotFoundException();
         return mapper.map(postEntity, PostDto.class);
     }
 
@@ -74,6 +74,23 @@ public class MemeServiceImpl implements MemeService{
         return postId;
     }
 
+    public void updatePost(Map<String, Object> updates, long postId) throws PostNotFoundException, InvalidPostException{
+
+        Object newUrl = updates.get("url");
+
+        Object newCaption = updates.get("caption");
+
+        if (newUrl != null && isImageUrl(newUrl.toString()) == false) {
+            throw new InvalidPostException("Update failed because upadated url is not a valid image url.");
+        }
+
+        if (newCaption != null && newCaption.toString().isBlank()) {
+            throw new InvalidPostException("Update failed because updated caption is blank.");
+        }
+
+        repositoryService.updatePost(updates, postId); 
+    }
+
     private boolean isImageUrl(String uri) {
 
         try {
@@ -87,7 +104,8 @@ public class MemeServiceImpl implements MemeService{
 
             String contentType = response.headers().allValues("content-type").get(0);
             
-            if (contentType.equals("image/jpeg") || contentType.equals("image/jpg") || contentType.equals("image/png")) return true;
+            if (contentType.equals("image/jpeg") || contentType.equals("image/jpg") || contentType.equals("image/png")
+                || contentType.equals("image/JPEG") || contentType.equals("image/JPG") || contentType.equals("image/PNG")) return true;
             
             return false;
 
