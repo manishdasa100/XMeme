@@ -55,7 +55,7 @@ public class MemeServiceImpl implements MemeService{
         String url = post.getUrl();
         String caption = post.getCaption();
 
-        if (name == null || name.isEmpty() || url == null || url.isEmpty() || caption == null || caption.isEmpty()) {
+        if (name == null || name.isBlank() || url == null || url.isBlank() || caption == null || caption.isBlank()) {
             throw new InvalidPostException();
         }
 
