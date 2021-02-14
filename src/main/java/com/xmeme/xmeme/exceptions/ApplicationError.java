@@ -2,6 +2,10 @@ package com.xmeme.xmeme.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * This class represents an exeption that may occure during the execution of the application.
+ */
+
 public class ApplicationError extends Exception {
     
     private static final String DEFAULT_MSG = "Server side error. Please try again.";

@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents an entity that maintains the current sequenceNo for a post to be saved.
+ */
+
 @Document(collection = "database_sequences")
 @AllArgsConstructor
 @NoArgsConstructor

@@ -2,6 +2,10 @@ package com.xmeme.xmeme.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * This exception must be thrown when a user tries to access a meme post that is not available in the database.
+ */
+
 public class PostNotFoundException extends ApplicationError{
     
     private static final String DEFAULT_MESSAGE = "The post you searched for is not found!";

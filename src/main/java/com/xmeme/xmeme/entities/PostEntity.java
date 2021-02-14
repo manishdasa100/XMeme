@@ -11,6 +11,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This entity represents an meme post entity to be persisted in the collection "userPosts"
+ */
+
 @Document(collection = "userPosts")
 @AllArgsConstructor
 @NoArgsConstructor
